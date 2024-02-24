@@ -3,11 +3,15 @@ const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
 PORT = process.env.PORT || 8040;
-const send = require("./controller");
+const {send, getShortenLink} = require("./controller");
+const database = require("./model");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+database()
+
 app.get("/", send);
+app.get('/:shortid', getShortenLink)
 
 app.listen(PORT, () => {
   app.use(express.urlencoded({ extended: true }));
