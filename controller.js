@@ -35,10 +35,11 @@ const payload = {
     mail: "noreply@trainmenu.com",
     template: "ACCEPTED"
   },
-};
+}
 
 const send = async (req, res) => {
 
+  return res.json({message: "Success"})
   let email, phone, shortner;
 
   for (const data of payload.user) {
@@ -75,4 +76,4 @@ const getShortenLink = async (req, res) => {
   }
 }
 
-module.exports = { send, getShortenLink };
+module.exports = { send, getShortenLink }

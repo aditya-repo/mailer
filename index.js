@@ -5,12 +5,13 @@ dotenv.config();
 PORT = process.env.PORT || 8040;
 const {send, getShortenLink} = require("./controller");
 const database = require("./model");
+const authenticate = require("./middleware");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 database()
 
-app.get("/", send);
+app.get("/", authenticate, send);
 app.get('/:shortid', getShortenLink)
 
 app.listen(PORT, () => {
