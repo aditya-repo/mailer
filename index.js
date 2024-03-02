@@ -11,7 +11,8 @@ app.use(express.json());
 
 database()
 
-app.get("/", authenticate, send);
+// app.get("/", authenticate, send);
+app.get("/", send);
 app.get('/:shortid', getShortenLink)
 
 app.listen(PORT, () => {

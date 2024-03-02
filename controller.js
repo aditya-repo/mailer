@@ -1,7 +1,8 @@
 const mailEngine = require("./service/mail");
 const messageEngine = require("./service/message");
 const shortnerEngine = require('./service/shorten');
-const Url = require('./model/url')
+const Url = require('./model/url');
+const whatsappEngine = require("./service/whatsapp");
 
 const payload = {
   service: ["email", "message", "whatsapp"],
@@ -13,6 +14,7 @@ const payload = {
       orderstatus: "CANCELLED",
       orderdetails: "BIRYANI, RAITA",
       trainno: "56468",
+      doj: "24-10-2024",
       store: "Pal Hotel, Patna",
       expecteddeliverytime: "2 Hour",
       stationid: "PNBE",
@@ -44,17 +46,22 @@ const send = async (req, res) => {
 
   for (const data of payload.user) {
 
-    if (payload.service.includes("email")) {
-      // Send to email client
-      email = await mailEngine(data, payload.sender);
-    }
+    // if (payload.service.includes("email")) {
+    //   // Send to email client
+    //   email = await mailEngine(data, payload.sender);
+    // }
 
-    if (payload.service.includes("message")) {
+    // if (payload.service.includes("message")) {
+    //   // Send to message client
+    //   phone = await messageEngine(data,payload.sender);
+    // }
+
+    if (payload.service.includes("whatsapp")) {
       // Send to message client
-      phone = await messageEngine(data,payload.sender);
+      phone = await whatsappEngine(data,payload.sender);
     }
 
-    shortner = await shortnerEngine(data.url)
+    // shortner = await shortnerEngine(data.url)
     // console.log(shortner)
 
   }
