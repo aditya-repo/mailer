@@ -1,11 +1,11 @@
 const mailEngine = require("./service/mail");
 const messageEngine = require("./service/message");
-const shortnerEngine = require('./service/shorten');
-const Url = require('./model/url');
+const shortnerEngine = require("./service/shorten");
+const Url = require("./model/url");
 const whatsappEngine = require("./service/whatsapp");
 const Payload = require("./model/user");
 
-const payload = {
+let payload = {
   service: ["email", "message", "whatsapp"],
   user: [
     {
@@ -26,7 +26,7 @@ const payload = {
       number: 7050020659,
       mailid: "adityadesk99@gmail.com",
       wnumber: 8409049571,
-      url: "https://trainmenu.com"
+      url: "https://trainmenu.com",
     },
   ],
   sender: {
@@ -36,34 +36,41 @@ const payload = {
     address: "70 Feet Road, Patna",
     type: "transaction",
     mail: "noreply@trainmenu.com",
-    template: "ACCEPTED"
+    template: "ACCEPTED",
   },
-}
+};
 
 const send = async (req, res) => {
-
   // return res.json({message: "Success"})
-  let email, phone, shortner;
+  let email, phone, shortner, orderid, shortlink;
+
+  payload = req.body.payload;
+
+  let result = {};
 
   for (const data of payload.user) {
-
-    shortner = await shortnerEngine(data.url)
-    data.url = `https://trmn.in/${shortner}`
-
+    shortner = await shortnerEngine(data.url);
+    data.url = `trmn.in/${shortner}`;
+    orderid = data.orderid;
+    shortlink = shortner;
     // console.log(payload);
     // return
 
-    await Payload.create(payload)
+    result = { ...result, orderid, shortlink };
+
+    await Payload.create(payload);
     // console.log(shortner)
 
     if (payload.service.includes("email")) {
       // Send to email client
       email = await mailEngine(data, payload.sender);
+      result = { ...result, email };
     }
 
     if (payload.service.includes("message")) {
       // Send to message client
-      phone = await messageEngine(data,payload.sender);
+      phone = await messageEngine(data, payload.sender);
+      result = { ...result, phone };
     }
 
     // if (payload.service.includes("whatsapp")) {
@@ -72,25 +79,21 @@ const send = async (req, res) => {
     //   res.json(whatsapp)
 
     // }
-
-
   }
 
-
-  const result = { payload, email, phone, shortner }
-  res.json(result)
+  // result = { orderid, email, phone, shortner };
+  res.json(result);
 };
 
 const getShortenLink = async (req, res) => {
-
   const { shortid } = req.params;
   // Find the original URL in the database
   const urlEntry = await Url.findOne({ shortUid: shortid });
   if (urlEntry) {
     res.redirect(urlEntry.originalUrl);
   } else {
-    res.status(404).send('URL not found');
+    res.status(404).send("URL not found");
   }
-}
+};
 
-module.exports = { send, getShortenLink }
+module.exports = { send, getShortenLink };

@@ -3,17 +3,17 @@ const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
 PORT = process.env.PORT || 8040;
-const {send, getShortenLink} = require("./controller");
+const { send, getShortenLink } = require("./controller");
 const database = require("./model");
 const authenticate = require("./middleware");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-database()
+database();
 
-// app.get("/", authenticate, send);
-app.get("/", send);
-app.get('/:shortid', getShortenLink)
+app.get("/", (req, res) => res.json({ Message: "Hello from Mail server" }));
+app.post("/", send);
+app.get("/:shortid", getShortenLink);
 
 app.listen(PORT, () => {
   app.use(express.urlencoded({ extended: true }));
