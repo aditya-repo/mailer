@@ -3,6 +3,7 @@ const messageEngine = require("./service/message");
 const shortnerEngine = require('./service/shorten');
 const Url = require('./model/url');
 const whatsappEngine = require("./service/whatsapp");
+const Payload = require("./model/user");
 
 const payload = {
   service: ["email", "message", "whatsapp"],
@@ -24,7 +25,7 @@ const payload = {
       ordernote: "This is an order note",
       number: 7050020659,
       mailid: "adityadesk99@gmail.com",
-      wnumber: 8903240659,
+      wnumber: 8409049571,
       url: "https://trainmenu.com"
     },
   ],
@@ -41,28 +42,37 @@ const payload = {
 
 const send = async (req, res) => {
 
-  return res.json({message: "Success"})
+  // return res.json({message: "Success"})
   let email, phone, shortner;
 
   for (const data of payload.user) {
 
-    // if (payload.service.includes("email")) {
-    //   // Send to email client
-    //   email = await mailEngine(data, payload.sender);
-    // }
+    shortner = await shortnerEngine(data.url)
+    data.url = `https://trmn.in/${shortner}`
 
-    // if (payload.service.includes("message")) {
-    //   // Send to message client
-    //   phone = await messageEngine(data,payload.sender);
-    // }
+    // console.log(payload);
+    // return
 
-    if (payload.service.includes("whatsapp")) {
-      // Send to message client
-      phone = await whatsappEngine(data,payload.sender);
+    await Payload.create(payload)
+    // console.log(shortner)
+
+    if (payload.service.includes("email")) {
+      // Send to email client
+      email = await mailEngine(data, payload.sender);
     }
 
-    // shortner = await shortnerEngine(data.url)
-    // console.log(shortner)
+    if (payload.service.includes("message")) {
+      // Send to message client
+      phone = await messageEngine(data,payload.sender);
+    }
+
+    // if (payload.service.includes("whatsapp")) {
+    //   // Send to message client
+    //   whatsapp = await whatsappEngine(data,payload.sender);
+    //   res.json(whatsapp)
+
+    // }
+
 
   }
 

@@ -1,4 +1,5 @@
 const dotenv = require('dotenv')
+const axios = require('axios')
 dotenv.config()
 
 const WHATSAPPTOKEN = process.env.WHATSAPPTOKEN
@@ -9,10 +10,10 @@ const LICENSENUMBER = process.env.LICENSENUMBER
 const whatsappEngine = async (customer, sender) => {
     const templatename = 'place_order'
 
-    const order = {
+    const c = {
         name: customer.name,
         orderid: customer.orderid,
-        trainno: customer.train,
+        trainno: customer.trainno,
         doj: customer.doj,
         seatno: customer.seatno,
         stationid: customer.stationid,
@@ -24,10 +25,9 @@ const whatsappEngine = async (customer, sender) => {
         template: templatename,
         apikey: WHATSAPPTOKEN,
         contact: customer.wnumber,
-        param: order,
     }
 
-    const URL = `https://app.chatboat.in/api/sendtemplate.php?LicenseNumber=${param.license}&APIKey=${param.apikey}&Contact=${param.contact}&Template=${templatename}&Param=${order}`
+    const URL = `https://app.chatboat.in/api/sendtemplate.php?LicenseNumber=${param.license}&APIKey=${param.apikey}&Contact=${param.contact}&Template=${templatename}&Param=${c.name},${c.orderid},${c.trainno},${c.doj},${c.seatno},${c.stationid},${c.expecteddeliverytime},${c.paymentmode}`
 
     console.log(URL);
     const sendWhatsapp = async (url) => {
@@ -47,8 +47,8 @@ const whatsappEngine = async (customer, sender) => {
 
     // Example usage:
     result = await sendWhatsapp(URL);
-console.log(result);
-    // return result
+// console.log(result);
+    return result
 }
 
 

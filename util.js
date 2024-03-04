@@ -47,7 +47,7 @@ const messageTemplate = (userdata, template) => {
     let message;
     if (template == 'ACCEPTED') {
         // Case & Space Sensetive
-        message = `Your order#${userdata.orderid} has been placed for ${userdata.station}. Details & Status: ${userdata.url} or Call: ${PHONE} Trainmenu `;
+        message = `Your order#${userdata.orderid} has been placed for ${userdata.stationid}. Details & Status: ${userdata.url} or Call: ${PHONE} Trainmenu `;
     }
     if (template == 'DELIVERED') {
         // Case & Space Sensetive
