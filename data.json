@@ -5,27 +5,48 @@
             "message",
             "whatsapp"
         ],
-        "user": [
-            {
-                "name": "Aditya RAJ",
-                "seatno": "D 75",
-                "orderid": "TM900573",
-                "orderstatus": "CANCELLED",
-                "orderdetails": "BIRYANI, RAITA",
-                "trainno": "56468",
-                "store": "Pal Hotel, Patna",
-                "expecteddeliverytime": "2 Hour",
-                "stationid": "PNBE",
-                "orderamount": 500,
-                "ordertype": "COD",
-                "time": "10:00:00",
-                "ordernote": "This is an order note",
-                "number": 7050020659,
-                "mailid": "adityadesk99@gmail.com",
-                "wnumber": 8903240659,
-                "url": "https://trainmenu.com"
-            }
-        ],
+        "user": {
+            "name": "Aditya RAJ",
+            "seatno": "D 75",
+            "orderid": "TM900573",
+            "orderstatus": "CANCELLED",
+            "orderdetails": "BIRYANI, RAITA",
+            "itemdetails": [
+                {
+                    "itemname": "PANNER BUTTER MASALA COMBO",
+                    "quantity": 1,
+                    "price": 200
+                },
+                {
+                    "itemname": "CHICKEN BIRYANI",
+                    "quantity": 2,
+                    "price": 250
+                },
+                {
+                    "itemname": "VEGETABLE PULAO",
+                    "quantity": 1,
+                    "price": 150
+                },
+                {
+                    "itemname": "GARLIC NAAN",
+                    "quantity": 3,
+                    "price": 30
+                }
+            ],
+            "trainno": "56468",
+            "doj": "24-10-2024",
+            "store": "Pal Hotel, Patna",
+            "expecteddeliverytime": "2 Hour",
+            "stationid": "PNBE",
+            "orderamount": 500,
+            "ordertype": "COD",
+            "time": "10:00:00",
+            "ordernote": "This is an order note",
+            "number": 7050020659,
+            "mailid": "adityadesk99@gmail.com",
+            "wnumber": 8409049571,
+            "url": "https://trainmenu.com/offers"
+        },
         "sender": {
             "name": "Trainmenu",
             "phone": 8405076072,
@@ -33,26 +54,7 @@
             "address": "70 Feet Road, Patna",
             "type": "transaction",
             "mail": "noreply@trainmenu.com",
-            "template": "ACCEPTED"
+            "template": "VACCEPTED"
         }
-    },
-    "email": {
-        "data": [
-            {
-                "code": "EM_104",
-                "additional_info": [],
-                "message": "Email request received"
-            }
-        ],
-        "message": "OK",
-        "request_id": "2518b.7689ed5afbee3a34.m4.bc7d5620-d327-11ee-b834-52540038fbba.18ddbb0c482",
-        "object": "email"
-    },
-    "phone": {
-        "Status": "Success",
-        "Code": "001",
-        "Message-Id": "NTc5Njc0OA==",
-        "Description": "Compaign is successfully."
-    },
-    "shortner": "qgPAf"
+    }
 }

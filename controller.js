@@ -4,31 +4,35 @@ const shortnerEngine = require("./service/shorten");
 const Url = require("./model/url");
 const whatsappEngine = require("./service/whatsapp");
 const Payload = require("./model/user");
+const { mailStatus, messageStatus } = require("./middlewares/statuscode");
 
 let payload = {
   service: ["email", "message", "whatsapp"],
-  user: [
-    {
-      name: "Aditya RAJ",
-      seatno: "D 75",
-      orderid: "TM900573",
-      orderstatus: "CANCELLED",
-      orderdetails: "BIRYANI, RAITA",
-      trainno: "56468",
-      doj: "24-10-2024",
-      store: "Pal Hotel, Patna",
-      expecteddeliverytime: "2 Hour",
-      stationid: "PNBE",
-      orderamount: 500,
-      ordertype: "COD",
-      time: "10:00:00",
-      ordernote: "This is an order note",
-      number: 7050020659,
-      mailid: "adityadesk99@gmail.com",
-      wnumber: 8409049571,
-      url: "https://trainmenu.com",
-    },
-  ],
+  user: {
+    userid: 23152465,
+    name: "Aditya RAJ",
+    vendorname: "Rajeev Ranjan",
+    seatno: "D 75",
+    orderid: "TM900573",
+    orderstatus: "CANCELLED",
+    orderdetails: "BIRYANI, RAITA",
+    trainno: "56468",
+    doj: "24-10-2024",
+    store: "Pal Hotel, Patna",
+    expecteddeliverytime: "2 Hour",
+    stationid: "PNBE",
+    orderamount: 500,
+    ordertype: "COD",
+    paymentstatus: "Online Paid",
+    itemdetails: { itemname: "PANNER BUTTER MASALA COMBO", quantity: 1, price: 200 },
+    time: "10:00:00",
+    ordernote: "This is an order note",
+    number: 7050020659,
+    number2: 9576879382,
+    mailid: "adityadesk99@gmail.com",
+    wnumber: 8409049571,
+    url: "https://trainmenu.com",
+  },
   sender: {
     name: "Trainmenu",
     phone: 8405076072,
@@ -36,53 +40,51 @@ let payload = {
     address: "70 Feet Road, Patna",
     type: "transaction",
     mail: "noreply@trainmenu.com",
-    template: "ACCEPTED",
+    template: "VACCEPTED",
   },
 };
 
 const send = async (req, res) => {
   // return res.json({message: "Success"})
-  let email, phone, shortner, orderid, shortlink;
+  let email, message, shortner, userid;
 
   payload = req.body.payload;
-
   let result = {};
 
-  for (const data of payload.user) {
-    shortner = await shortnerEngine(data.url);
-    data.url = `trmn.in/${shortner}`;
-    orderid = data.orderid;
-    shortlink = shortner;
-    // console.log(payload);
-    // return
+  let data = payload.user
 
-    result = { ...result, orderid, shortlink };
+  shortner = await shortnerEngine(data.url);
+  data.url = `trmn.in/${shortner}`;
+  userid = data.userid;
 
-    await Payload.create(payload);
-    // console.log(shortner)
+  result = { ...result, userid };
 
-    if (payload.service.includes("email")) {
-      // Send to email client
-      email = await mailEngine(data, payload.sender);
-      result = { ...result, email };
-    }
+  // await Payload.create(payload);
 
-    if (payload.service.includes("message")) {
-      // Send to message client
-      phone = await messageEngine(data, payload.sender);
-      result = { ...result, phone };
-    }
+  // if (payload.service.includes("email")) {
+  //   // Sending Email...
+  //   email = await mailEngine(data, payload.sender);
+  //   // Return Message Status
+  //   email = mailStatus(email)
+  //   result = { ...result, email };
+  // }
 
-    // if (payload.service.includes("whatsapp")) {
-    //   // Send to message client
-    //   whatsapp = await whatsappEngine(data,payload.sender);
-    //   res.json(whatsapp)
+  // if (payload.service.includes("message")) {
+  //   // Sending Message...
+  //   const phone = await messageEngine(data, payload.sender);
+  //   // Return Message Status
+  //   message = messageStatus(phone)
+  //   result = { ...result, message };
+  // }
 
-    // }
-  }
+  // if (payload.service.includes("whatsapp")) {
+  //   // Send to message client
+  //   whatsapp = await whatsappEngine(data,payload.sender);
+  //   res.json(whatsapp)
+  // }
 
-  // result = { orderid, email, phone, shortner };
   res.json(result);
+  // res.json({"message":"Hello World!"})
 };
 
 const getShortenLink = async (req, res) => {

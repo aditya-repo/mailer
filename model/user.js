@@ -1,23 +1,9 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
+  userid: String,
   name: String,
   seatno: String,
-  orderid: String,
-  orderstatus: String,
-  orderdetails: String,
-  trainno: String,
-  doj: String,
-  store: String,
-  expecteddeliverytime: String,
-  stationid: String,
-  orderamount: Number,
-  ordertype: String,
-  time: String,
-  ordernote: String,
-  number: Number,
-  mailid: String,
-  wnumber: Number,
   url: String,
   sender: {
     name: String,

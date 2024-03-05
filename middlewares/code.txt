@@ -1,0 +1,9 @@
+// Status code 
+
+ER00 - No status code matched
+ER01 - Mandatory field missing - TM_3201
+ER02 - Invalid Template ID  OR Wrong format - TM_3501
+ER03 - Mandatory field has Invalid Value or  token is invalid. TM_4001
+ER04 - Data is exciding the limits - TM_8001
+SU01 - Successfull executed
+SU02 - Successfull but missing additional information

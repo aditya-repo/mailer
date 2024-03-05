@@ -5,7 +5,7 @@ dotenv.config();
 PORT = process.env.PORT || 8040;
 const { send, getShortenLink } = require("./controller");
 const database = require("./model");
-const authenticate = require("./middleware");
+const authenticate = require("./middlewares/auth");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

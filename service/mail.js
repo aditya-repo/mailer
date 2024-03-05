@@ -30,7 +30,7 @@ const mailEngine = async (userdata, metadata) => {
         merge_info: mergeInfoType(userdata, templatetype),
       })
       .then((resp) => {
-        console.log(resp);
+        // console.log(resp);
         return resp;
       })
       .catch((error) => {
