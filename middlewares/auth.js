@@ -9,12 +9,12 @@ const authenticate = (req, res, next) => {
   
     // Replace 'your-secret-key' with your actual authentication key
     if (authKey === AUTHKEY) {
-      next(); // Proceed to the next middleware or route handler
+      return next(); // Proceed to the next middleware or route handler
     } else {
-      res.status(401).json({ error: 'Unauthorized' });
+      return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    next()
+    // next()
   };
 
 module.exports = authenticate

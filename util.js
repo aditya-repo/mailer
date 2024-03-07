@@ -15,13 +15,33 @@ const generateUid = () => {
     return uid;
 }
 
+const messageTemplateId = {
+    "PLACED": "1207168157481008393",
+    "ACCEPTED": "1207170885741410979",
+    "DELIVERED": "1207168157546932475",
+    "UNDELIVERED": "1207170885745505813",
+    "VCANCELLED": "1207170885554350312",
+}
+
 // Email template Map
 const emailTemplate = {
+    "PLACED": "2518b.7689ed5afbee3a34.k1.434abdd0-d0af-11ee-b834-52540038fbba.18dcb7fca2d",
     "ACCEPTED": "2518b.7689ed5afbee3a34.k1.a5768ea1-d0c1-11ee-b834-52540038fbba.18dcbf8448a",
     "CANCELLED": "2518b.7689ed5afbee3a34.k1.8bb89760-d0c1-11ee-b834-52540038fbba.18dcbf79bd6",
     "UNDELIVERED": "2518b.7689ed5afbee3a34.k1.f88a5e60-d0c0-11ee-b834-52540038fbba.18dcbf3d746",
-    "PLACED": "2518b.7689ed5afbee3a34.k1.434abdd0-d0af-11ee-b834-52540038fbba.18dcb7fca2d",
     "VACCEPTED": "2518b.7689ed5afbee3a34.k1.0d374ea0-d55c-11ee-8b58-525400b0b0f3.18dea23108a"
+}
+
+const whatsappTemplateId = {
+    "PLACED": "cplaced",
+    "ACCEPTED": "caccepted",
+    "DELIVERED": "cdelivered",
+    "UNDELIVERED": "cundelivered",
+    "CANCELLED": "cuscancelled",
+    "VACCEPTED": "vendplaced",
+    "VDELIVERED": "vdelivered",
+    "VUNDELIVERED": "vundelivered",
+    "VCANCELLED": "vcancel",
 }
 
 const mergeInfoType = (userdata, template) => {
@@ -53,20 +73,9 @@ const mergeInfoType = (userdata, template) => {
     return data;
 }
 
-const messageTemplateId = {
-    "PLACED": "1207168157481008393",
-    "DELIVERED": "1207168157546932475",
-    "ACCEPTED": "1207170885741410979",
-    "UNDELIVERED": "1207170885745505813",
-    "CANCELLED": "",
-    // "VACCEPTED": "1207170885741410979",
-    "VCANCELLED": "1207170885554350312",
-
-}
-
 const messageTemplate = (userdata, template) => {
     let message;
-        // Case & Space Sensetive
+    // Case & Space Sensetive
     if (template == 'PLACED') {
         message = `Your order#${userdata.orderid} has been placed for ${userdata.stationid}. Details & Status: ${userdata.url} or Call: ${PHONE} Trainmenu `;
     }
@@ -83,9 +92,42 @@ const messageTemplate = (userdata, template) => {
     if (template == 'VCANCELLED') {
         message = `Dear Vendor, Order #${userdata.orderid} is CANCELLED due to a customer issue. We apologize for any inconvenience. Team Trainmenu`;
     }
-    console.log(message);
     return message
 }
 
 
-module.exports = { generateUid, mergeInfoType, emailTemplate, messageTemplate, messageTemplateId }
+const whatsappTemplate = (u, template) => {
+    let message;
+    if (template == 'PLACED') {
+        message = `${u.name},${u.stationid},${u.store},${u.orderid},${u.trainno},${u.seatno},${u.orderamount},${u.ordertype},${u.orderdetails}`
+    }
+    if (template == 'ACCEPTED') {
+        message = `${u.name},${u.orderid},${u.stationid}&HeadParam=${u.orderid}`
+    }
+    if (template == 'DELIVERED') {
+        message = `${u.name},${u.orderid}`
+    }
+    if (template == 'UNDELIVERED') {
+        message = `Not Defiend Yet`
+    }
+    if (template == 'CANCELLED') {
+        message = `${u.name},${u.orderid},${u.cancelreason}&HeadParam=${u.orderid}`
+    }
+    if (template == 'VACCEPTED') {
+        message = `${u.store},${u.orderid},${u.trainno},${u.stationid},${u.name},${u.number},${u.seatno},${u.orderamount},${u.ordertype},${u.orderdetails}`
+    }
+    if (template == 'VDELIVERED') {
+        message = `${u.store},${u.orderid}&HeadParam=${u.orderid}`
+    }
+    if (template == 'VUNDELIVERED') {
+        message = `${u.store},${u.orderid}&HeadParam=${u.orderid}`
+    }
+    if (template == 'VCANCELLED') {
+        message = `${u.store},${u.orderid},${u.cancelreason}`
+    }
+    // console.log(template);
+    return message
+}
+
+
+module.exports = { generateUid, mergeInfoType, emailTemplate, messageTemplate, messageTemplateId, whatsappTemplate, whatsappTemplateId }

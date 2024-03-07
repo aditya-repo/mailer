@@ -6,7 +6,6 @@ dotenv.config();
 const TOKEN = process.env.MESSAGETOKEN;
 const MESSAGEID = process.env.MESSAGEID;
 const MESSAGEURL = process.env.MESSAGEURL;
-const PHONE = process.env.TMPHONE;
 // const SHORTURL = process.env.SHORTENEDURL;
 
 const messageEngine = async (userdata, metadata) => {
@@ -15,9 +14,6 @@ const messageEngine = async (userdata, metadata) => {
   // creating user address object to send address
   const url = MESSAGEURL;
 
-  // Replace with your actual values
-  const orderid = userdata.orderid;
-  const station = userdata.stationid;
   const number = userdata.number;
 
   const message = messageTemplate(userdata, templatetype)

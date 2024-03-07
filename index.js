@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
-PORT = process.env.PORT || 8040;
+const PORT = process.env.PORT || 8040;
 const { send, getShortenLink } = require("./controller");
 const database = require("./model");
 const authenticate = require("./middlewares/auth");
@@ -12,7 +12,7 @@ app.use(express.json());
 database();
 
 app.get("/", (req, res) => res.json({ Message: "Hello from Mail server" }));
-app.post("/", send);
+app.post("/", authenticate, send);
 app.get("/:shortid", getShortenLink);
 
 app.listen(PORT, () => {

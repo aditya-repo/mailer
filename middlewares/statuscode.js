@@ -35,7 +35,6 @@ const mailStatus = data => {
                 status = 'SU02'
                 break;
         }
-        console.log(data);
         details = data.data[0]
     }
 
@@ -66,4 +65,29 @@ const messageStatus = data => {
 
 }
 
-module.exports = { mailStatus, messageStatus }
+const whatsappStatus = data => {
+    let message, status, details
+    message = data.ApiResponse
+    details = data.ApiMessage
+
+    const codeMap = {
+        '001': 'SU01',
+        '002': 'ER03',
+        '003': 'ER03',
+        '008': 'ER03',
+        '016': 'ER02',
+        '017': 'ER03',
+        '005': 'ER01',
+        '018': 'ER01',
+        '021': 'ER01',
+        '022': 'ER01',
+        '023': 'ER01',
+    }
+
+    status = codeMap[data.Code] || 'SU02'
+    // return { status, message, details }
+    return { message, details }
+
+}
+
+module.exports = { mailStatus, messageStatus, whatsappStatus }

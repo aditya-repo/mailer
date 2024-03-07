@@ -26,7 +26,7 @@ const mailEngine = async (userdata, metadata) => {
           name: metadata.name,
         },
         to: [{email_address}], // Corrected line
-        subject: "Order created successfully",
+        subject: userdata.subject,
         merge_info: mergeInfoType(userdata, templatetype),
       })
       .then((resp) => {

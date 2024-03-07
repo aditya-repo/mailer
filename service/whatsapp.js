@@ -1,5 +1,6 @@
 const dotenv = require('dotenv')
 const axios = require('axios')
+const { whatsappTemplateId, whatsappTemplate } = require('../util')
 dotenv.config()
 
 const WHATSAPPTOKEN = process.env.WHATSAPPTOKEN
@@ -8,18 +9,11 @@ const LICENSENUMBER = process.env.LICENSENUMBER
 
 
 const whatsappEngine = async (customer, sender) => {
-    const templatename = 'place_order'
+    const templatename = whatsappTemplateId[sender.template]
 
-    const c = {
-        name: customer.name,
-        orderid: customer.orderid,
-        trainno: customer.trainno,
-        doj: customer.doj,
-        seatno: customer.seatno,
-        stationid: customer.stationid,
-        expecteddeliverytime: customer.expecteddeliverytime,
-        paymentmode: customer.ordertype
-    }
+    const message = whatsappTemplate(customer, sender.template)
+    // console.log(message);return
+
     const param = {
         license: LICENSENUMBER,
         template: templatename,
@@ -27,7 +21,7 @@ const whatsappEngine = async (customer, sender) => {
         contact: customer.wnumber,
     }
 
-    const URL = `https://app.chatboat.in/api/sendtemplate.php?LicenseNumber=${param.license}&APIKey=${param.apikey}&Contact=${param.contact}&Template=${templatename}&Param=${c.name},${c.orderid},${c.trainno},${c.doj},${c.seatno},${c.stationid},${c.expecteddeliverytime},${c.paymentmode}`
+    const URL = `https://app.chatboat.in/api/sendtemplate.php?LicenseNumber=${param.license}&APIKey=${param.apikey}&Contact=${param.contact}&Template=${templatename}&Param=${message}`
 
     console.log(URL);
     const sendWhatsapp = async (url) => {
