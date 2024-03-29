@@ -111,7 +111,7 @@ const whatsappTemplate = (u, template) => {
         message = `Not Defiend Yet`
     }
     if (template == 'CANCELLED') {
-        message = `${u.name},${u.orderid},${u.cancelreason}&HeadParam=${u.orderid}`
+        message = `${u.name},${u.orderid},${u.remarks}&HeadParam=${u.orderid}`
     }
     if (template == 'VACCEPTED') {
         message = `${u.store},${u.orderid},${u.trainno},${u.stationid},${u.name},${u.cnumber},${u.seatno},${u.orderamount},${u.ordertype},${u.orderdetails}`
@@ -123,7 +123,7 @@ const whatsappTemplate = (u, template) => {
         message = `${u.store},${u.orderid}&HeadParam=${u.orderid}`
     }
     if (template == 'VCANCELLED') {
-        message = `${u.store},${u.orderid},${u.cancelreason}`
+        message = `${u.store},${u.orderid},${u.remarks}`
     }
     // console.log(template);
     return message
