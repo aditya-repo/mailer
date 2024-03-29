@@ -114,7 +114,7 @@ const whatsappTemplate = (u, template) => {
         message = `${u.name},${u.orderid},${u.cancelreason}&HeadParam=${u.orderid}`
     }
     if (template == 'VACCEPTED') {
-        message = `${u.store},${u.orderid},${u.trainno},${u.stationid},${u.name},${u.number},${u.seatno},${u.orderamount},${u.ordertype},${u.orderdetails}`
+        message = `${u.store},${u.orderid},${u.trainno},${u.stationid},${u.name},${u.cnumber},${u.seatno},${u.orderamount},${u.ordertype},${u.orderdetails}`
     }
     if (template == 'VDELIVERED') {
         message = `${u.store},${u.orderid}&HeadParam=${u.orderid}`
