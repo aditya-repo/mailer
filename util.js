@@ -36,7 +36,7 @@ const whatsappTemplateId = {
     "PLACED": "cplaced",
     "ACCEPTED": "caccepted",
     "DELIVERED": "cdelivered",
-    "UNDELIVERED": "cundelivered",
+    "UNDELIVERED": "cstundelivered",
     "CANCELLED": "cuscancelled",
     "VACCEPTED": "vendplaced",
     "VDELIVERED": "vdelivered",
@@ -99,7 +99,7 @@ const messageTemplate = (userdata, template) => {
 const whatsappTemplate = (u, template) => {
     let message;
     if (template == 'PLACED') {
-        message = `${u.name},${u.stationid},${u.store},${u.orderid},${u.trainno},${u.seatno},${u.orderamount},${u.ordertype},${u.orderdetails}`
+        message = `${u.name},${u.stationid},${u.store},${u.orderid},${u.trainno},${u.seatno},${u.orderamount},${u.ordertype},${u.orderdetails}, ${u.remarks} `
     }
     if (template == 'ACCEPTED') {
         message = `${u.name},${u.orderid},${u.stationid}&HeadParam=${u.orderid}`
@@ -108,22 +108,22 @@ const whatsappTemplate = (u, template) => {
         message = `${u.name},${u.orderid}`
     }
     if (template == 'UNDELIVERED') {
-        message = `Not Defiend Yet`
+        message = `${u.name},${u.orderid},${u.remarks}&HeadParam=${u.orderid}`
     }
     if (template == 'CANCELLED') {
         message = `${u.name},${u.orderid},${u.remarks}&HeadParam=${u.orderid}`
     }
     if (template == 'VACCEPTED') {
-        message = `${u.store},${u.orderid},${u.trainno},${u.stationid},${u.name},${u.cnumber},${u.seatno},${u.orderamount},${u.ordertype},${u.orderdetails}`
+        message = `${u.store},${u.orderid},${u.trainno},${u.stationid},${u.name},${u.cnumber},${u.seatno},${u.orderamount},${u.ordertype},${u.orderdetails}, ${u.expecteddeliverytime} &HeadParam=${u.orderid}`
     }
-    if (template == 'VDELIVERED') {
-        message = `${u.store},${u.orderid}&HeadParam=${u.orderid}`
+    if (template == 'VCANCELLED') {
+        message = `${u.store},${u.orderid},${u.remarks}&HeadParam=${u.orderid}`
     }
     if (template == 'VUNDELIVERED') {
         message = `${u.store},${u.orderid}&HeadParam=${u.orderid}`
     }
-    if (template == 'VCANCELLED') {
-        message = `${u.store},${u.orderid},${u.remarks}`
+    if (template == 'VDELIVERED') {
+        message = `${u.store},${u.orderid}&HeadParam=${u.orderid}`
     }
     // console.log(template);
     return message
