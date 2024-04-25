@@ -85,8 +85,8 @@ const whatsappStatus = data => {
     }
 
     status = codeMap[data.Code] || 'SU02'
-    // return { status, message, details }
-    return { message, details }
+    return { status, message, details }
+    // return { message, details }
 
 }
 
