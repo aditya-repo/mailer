@@ -1,5 +1,6 @@
 const dotenv = require('dotenv');
-const vaccepted = require('./templates/vaccept');
+const vaccepted = require('./templates/vaccepted');
+const cplaced = require('./templates/cplaced');
 dotenv.config()
 
 PHONE = process.env.TMPHONE
@@ -29,7 +30,10 @@ const emailTemplate = {
     "ACCEPTED": "2518b.7689ed5afbee3a34.k1.a5768ea1-d0c1-11ee-b834-52540038fbba.18dcbf8448a",
     "CANCELLED": "2518b.7689ed5afbee3a34.k1.8bb89760-d0c1-11ee-b834-52540038fbba.18dcbf79bd6",
     "UNDELIVERED": "2518b.7689ed5afbee3a34.k1.f88a5e60-d0c0-11ee-b834-52540038fbba.18dcbf3d746",
-    "VACCEPTED": "2518b.7689ed5afbee3a34.k1.0d374ea0-d55c-11ee-8b58-525400b0b0f3.18dea23108a"
+    "VACCEPTED": "2518b.7689ed5afbee3a34.k1.0d374ea0-d55c-11ee-8b58-525400b0b0f3.18dea23108a",
+    "VCANCELLED": "2518b.7689ed5afbee3a34.k1.dc2ba1d0-dc77-11ee-96f3-52540038fbba.18e18b95c6d",
+    "VDELIVERED": "2518b.7689ed5afbee3a34.k1.ebfdb3d0-dc79-11ee-96f3-52540038fbba.18e18c6df8d",
+    "VUNDELIVERED": "2518b.7689ed5afbee3a34.k1.3e383a91-dc79-11ee-96f3-52540038fbba.18e18c26cb4",
 }
 
 const whatsappTemplateId = {
@@ -56,17 +60,29 @@ const mergeInfoType = (userdata, template) => {
         data = { seat: userdata.seatno, deliverystation: userdata.stationid, orderstatus: userdata.orderstatus, orderid: userdata.orderid, trainno: userdata.trainno, store: userdata.store, expecteddeliverytime: userdata.expecteddeliverytime }
     }
     if (template == 'CANCELLED') {
-        data = { ordeid: userdata.orderid, deliverystation: userdata.stationid, orderstatus: userdata.orderstatus, trainno: userdata.trainno, store: userdata.store }
+        data = { ordeid: userdata.orderid,orderid: userdata.orderid, deliverystation: userdata.stationid, Customer: userdata.name, trainno: userdata.trainno, store: userdata.store }
     }
     if (template == 'UNDELIVERED') {
-        data = { deliverystation: userdata.deliverystation, orderstatus: userdata.orderstatus, orderid: userdata.orderid, trainno: userdata.trainno, store: userdata.store }
-    }
-    if (template == 'PLACED') {
-        data = { paymentmode: userdata.ordertype, stationid: userdata.stationid, orderid: userdata.orderid, trainno: userdata.trainno, seatno: userdata.seatno, doj: userdata.doj, expecteddeliverytime: userdata.expecteddeliverytime, stationid: userdata.stationid }
+        data = { deliverystation: userdata.stationid, orderstatus: userdata.orderstatus, orderid: userdata.orderid, trainno: userdata.trainno, store: userdata.store }
     }
     if (template == 'VACCEPTED') {
         temp = vaccepted(userdata.itemdetails)
+        // console.log(temp);return
         data = { number: userdata.number, ordernote: userdata.ordernote, orderid: userdata.orderid, name: userdata.name, paymentstatus: userdata.paymentstatus, trainno: userdata.trainno, number2: userdata.number2, seatno: userdata.seatno, seatno: userdata.seatno, vendorname: userdata.vendorname, expecteddeliverytime: userdata.expecteddeliverytime, stationid: userdata.stationid, table_body: temp }
+    }
+    if (template == 'VCANCELLED') {
+        data = { ordeid: userdata.orderid,orderid: userdata.orderid, deliverystation: userdata.stationid, reasons:userdata.remarks, Vendor: userdata.store, trainno: userdata.trainno}
+    }
+    if (template == 'VUNDELIVERED') {
+        data = {Vendor: userdata.store, orderid: userdata.orderid}
+    }
+    if (template == 'VDELIVERED') {
+        data = {Vendor: userdata.store, orderid: userdata.orderid}
+    }
+
+    if (template == 'PLACED') {
+        temp = cplaced(userdata.itemdetails, userdata.paymentdata)
+        data = { paymentmode: userdata.ordertype, stationid: userdata.stationid, orderid: userdata.orderid, trainno: userdata.trainno, seatno: userdata.seatno, doj: userdata.doj, expecteddeliverytime: userdata.expecteddeliverytime, stationid: userdata.stationid, table_body: temp }
     }
 
     data = JSON.stringify(data)

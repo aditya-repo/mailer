@@ -1,4 +1,4 @@
-const vaccepted = itemdetails => {
+const vaccepted = (itemdetails) => {
     // console.log(data);
     // return
     // Sample data
@@ -8,7 +8,7 @@ const vaccepted = itemdetails => {
     // ];
 
     // Initialize the HTML string with the template
-var htmlString = `
+    var htmlString = `
 <tbody>
     <tr>
         <td style="width: 20px; text-align: center; height: 28px;">
@@ -23,9 +23,10 @@ var htmlString = `
     </tr>
 `;
 
-// Use a loop to add items dynamically
-for (var i = 0; i < itemdetails.length; i++) {
-htmlString += `
+    // Use a loop to add items dynamically
+    for (var i = 0; i < itemdetails.length; i++) {
+
+        htmlString += `
     <tr>
         <td style="width: 20px; text-align: center; height: 28px;">
             <div>${i + 1}<br></div>
@@ -38,25 +39,7 @@ htmlString += `
         </td>
     </tr>
 `;
-}
-
-// Add the total row to the HTML string
-htmlString += `
-    <tr>
-        <td>
-            <div><br></div>
-        </td>
-        <td style="width: 150px;text-align:right;padding-right: 16px">
-            <div><b>TOTAL</b> <br></div>
-        </td>
-        <td style="width: 50px; text-align:center">
-            <div>
-                <b><span class="size" style="font-size:16px">₹ ${itemdetails.reduce((total, item) => total + item.price * item.quantity, 0)}</span></b><br>
-            </div>
-        </td>
-    </tr>
-</tbody>
-`;
+    }
 
 
     return htmlString
