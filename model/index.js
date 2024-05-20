@@ -4,22 +4,15 @@ dotenv.config()
 
 const DATABASEURL = process.env.MONGOURI
 
-const database = () => {
+const database = async () => {
+    try {
+      await mongoose.connect(DATABASEURL);
+      console.log('Connected to MongoDB');
+    } catch (err) {
+      console.error('MongoDB connection error:', err);
+      throw err;
+    }
+  };
 
-    // Connect to MongoDB
-    mongoose.connect(DATABASEURL);
-
-    // Handling connection events
-    const db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-    db.once('open', () => {
-        console.log('Connected to MongoDB');
-    });
-
-    // Define your schema and models here
-
-    module.exports = mongoose;
-
-}
 
 module.exports = database

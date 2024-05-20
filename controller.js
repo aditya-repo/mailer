@@ -8,43 +8,6 @@ const { mailStatus, messageStatus, whatsappStatus } = require("./middlewares/sta
 const { messageTemplateId, emailTemplate, whatsappTemplateId } = require("./util");
 const SentUser = require("./model/sent");
 
-// let payload = {
-//   service: ["email", "message", "whatsapp"],
-//   user: {
-//     userid: 23152465,
-//     name: "Aditya RAJ",
-//     vendorname: "Rajeev Ranjan",
-//     seatno: "D 75",
-//     orderid: "TM900573",
-//     orderstatus: "CANCELLED",
-//     orderdetails: "BIRYANI, RAITA",
-//     trainno: "56468",
-//     doj: "24-10-2024",
-//     store: "Pal Hotel, Patna",
-//     expecteddeliverytime: "2 Hour",
-//     stationid: "PNBE",
-//     orderamount: 500,
-//     ordertype: "COD",
-//     paymentstatus: "Online Paid",
-//     itemdetails: { itemname: "PANNER BUTTER MASALA COMBO", quantity: 1, price: 200 },
-//     time: "10:00:00",
-//     ordernote: "This is an order note",
-//     number: 7050020659,
-//     number2: 9576879382,
-//     mailid: "adityadesk99@gmail.com",
-//     wnumber: 8409049571,
-//     url: "https://trainmenu.com",
-//   },
-//   sender: {
-//     name: "Trainmenu",
-//     phone: 8405076072,
-//     email: "service@trainmenu.com",
-//     address: "70 Feet Road, Patna",
-//     type: "transaction",
-//     mail: "noreply@trainmenu.com",
-//     template: "VACCEPTED",
-//   },
-// };
 
 const send = async (req, res) => {
   // return res.json({message: "Success"})
