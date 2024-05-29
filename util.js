@@ -42,7 +42,7 @@ const whatsappTemplateId = {
     "DELIVERED": "cdelivered",
     "UNDELIVERED": "cstundelivered",
     "CANCELLED": "cuscancelled",
-    "VACCEPTED": "vendplaced",
+    "VACCEPTED": "vplaced",
     "VDELIVERED": "vdelivered",
     "VUNDELIVERED": "vundelivered",
     "VCANCELLED": "vcancel",
@@ -51,16 +51,12 @@ const whatsappTemplateId = {
 const mergeInfoType = (userdata, template) => {
     let temp;
 
-    // console.log(userdata);
-
-    // [{itemname, quantity, price}]
-
     let data;
     if (template == 'ACCEPTED') {
         data = { seat: userdata.seatno, deliverystation: userdata.stationid, orderstatus: userdata.orderstatus, orderid: userdata.orderid, trainno: userdata.trainno, store: userdata.store, expecteddeliverytime: userdata.expecteddeliverytime }
     }
     if (template == 'CANCELLED') {
-        data = { ordeid: userdata.orderid,orderid: userdata.orderid, deliverystation: userdata.stationid, Customer: userdata.name, trainno: userdata.trainno, store: userdata.store }
+        data = { ordeid: userdata.orderid, orderid: userdata.orderid, deliverystation: userdata.stationid, Customer: userdata.name, trainno: userdata.trainno, store: userdata.store }
     }
     if (template == 'UNDELIVERED') {
         data = { deliverystation: userdata.stationid, orderstatus: userdata.orderstatus, orderid: userdata.orderid, trainno: userdata.trainno, store: userdata.store }
@@ -71,13 +67,13 @@ const mergeInfoType = (userdata, template) => {
         data = { number: userdata.number, ordernote: userdata.ordernote, orderid: userdata.orderid, name: userdata.name, duepayment: userdata.duepayment, trainno: userdata.trainno, seatno: userdata.seatno, seatno: userdata.seatno, vendorname: userdata.vendorname, expecteddeliverytime: userdata.expecteddeliverytime, stationid: userdata.stationid, table_body: temp }
     }
     if (template == 'VCANCELLED') {
-        data = { ordeid: userdata.orderid,orderid: userdata.orderid, deliverystation: userdata.stationid, reasons:userdata.remarks, Vendor: userdata.store, trainno: userdata.trainno}
+        data = { ordeid: userdata.orderid, orderid: userdata.orderid, deliverystation: userdata.stationid, reasons: userdata.remarks, Vendor: userdata.store, trainno: userdata.trainno }
     }
     if (template == 'VUNDELIVERED') {
-        data = {Vendor: userdata.store, orderid: userdata.orderid}
+        data = { Vendor: userdata.store, orderid: userdata.orderid }
     }
     if (template == 'VDELIVERED') {
-        data = {Vendor: userdata.store, orderid: userdata.orderid}
+        data = { Vendor: userdata.store, orderid: userdata.orderid }
     }
 
     if (template == 'PLACED') {
@@ -130,7 +126,7 @@ const whatsappTemplate = (u, template) => {
         message = `${u.name},${u.orderid},${u.remarks}&HeadParam=${u.orderid}`
     }
     if (template == 'VACCEPTED') {
-        message = `${u.store},${u.orderid},${u.trainno},${u.stationid},${u.name},${u.cnumber},${u.seatno},${u.orderamount},${u.duepayment},${u.orderdetails}, ${u.expecteddeliverytime} &HeadParam=${u.orderid}`
+        message = `${u.store},${u.orderid},${u.trainno},${u.stationid},${u.name},${u.cnumber},${u.seatno},${u.orderamount},${u.duepayment},${u.orderdetails}, ${u.expecteddeliverytime}, ${u.remarks}`
     }
     if (template == 'VCANCELLED') {
         message = `${u.store},${u.orderid},${u.remarks}&HeadParam=${u.orderid}`

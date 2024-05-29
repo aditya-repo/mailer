@@ -7,6 +7,10 @@ const Payload = require("./model/user");
 const { mailStatus, messageStatus, whatsappStatus } = require("./middlewares/statuscode");
 const { messageTemplateId, emailTemplate, whatsappTemplateId } = require("./util");
 const SentUser = require("./model/sent");
+const axios = require('axios')
+const dotenv = require('dotenv')
+dotenv.config()
+const AUTHKEY = process.env.AUTHKEY
 
 
 const send = async (req, res) => {
@@ -51,16 +55,28 @@ const send = async (req, res) => {
       // Send to message client
       whatsapp = await whatsappEngine(data, payload.sender);
       whatsapp = whatsappStatus(whatsapp)
-          result = { ...result, whatsapp };
+      result = { ...result, whatsapp };
       // res.json(whatsapp)
     }
-
   }
 
-        // Save the URL to the database
-        const entrydata = new SentUser(result);
-        await entrydata.save();
-    res.json(result);
+  // Save the URL to the database
+  const entrydata = new SentUser(result);
+  await entrydata.save();
+  res.json(result);
+
+
+  // // Axios posting data to trainmenu
+
+  // const targetUrl = 'https://trainmenu.com/mailer';
+
+  // await axios.post(targetUrl, result, {
+  //   headers: {
+  //     'Authorization': `Bearer ${AUTHKEY}`
+  //   }
+  // });
+
+  // res.status(200).json({"status": 200})
 
 };
 
