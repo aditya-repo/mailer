@@ -11,6 +11,7 @@ const axios = require('axios')
 const dotenv = require('dotenv')
 dotenv.config()
 const AUTHKEY = process.env.AUTHKEY
+const TESTURL = process.env.TESTURL
 
 
 const send = async (req, res) => {
@@ -63,20 +64,19 @@ const send = async (req, res) => {
   // Save the URL to the database
   const entrydata = new SentUser(result);
   await entrydata.save();
-  res.json(result);
 
+  console.log(result);
+  return res.json(result);
 
-  // // Axios posting data to trainmenu
+  const targetUrl = TESTURL;
 
-  // const targetUrl = 'https://trainmenu.com/mailer';
+  const response = await axios.post(targetUrl, result, {
+    headers: {
+      'Authorization': `Bearer ${AUTHKEY}`
+    }
+  });
 
-  // await axios.post(targetUrl, result, {
-  //   headers: {
-  //     'Authorization': `Bearer ${AUTHKEY}`
-  //   }
-  // });
-
-  // res.status(200).json({"status": 200})
+  res.status(200).json(response.data)
 
 };
 
