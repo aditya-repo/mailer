@@ -1,13 +1,4 @@
 const vaccepted = (itemdetails) => {
-    // console.log(data);
-    // return
-    // Sample data
-    // data = [
-    //     { itemName: "PANNER BUTTER MASALA COMBO", quantity: 1, price: 200 }
-    //     // Add more items as needed
-    // ];
-
-    // Initialize the HTML string with the template
     var htmlString = `
 <tbody>
     <tr>
