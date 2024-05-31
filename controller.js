@@ -66,7 +66,7 @@ const send = async (req, res) => {
   await entrydata.save();
 
   console.log(result);
-  return res.json(result);
+  // return res.json(result);
 
   const targetUrl = TESTURL;
 
