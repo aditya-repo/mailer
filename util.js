@@ -56,7 +56,7 @@ const mergeInfoType = (userdata, template) => {
         data = { seat: userdata.seatno, deliverystation: userdata.stationid, orderstatus: userdata.orderstatus, orderid: userdata.orderid, trainno: userdata.trainno, store: userdata.store, expecteddeliverytime: userdata.expecteddeliverytime }
     }
     if (template == 'CANCELLED') {
-        data = { ordeid: userdata.orderid, orderid: userdata.orderid, deliverystation: userdata.stationid, Customer: userdata.name, trainno: userdata.trainno, store: userdata.store }
+        data = { ordeid: userdata.orderid, orderid: userdata.orderid, deliverystation: userdata.stationid, customer: userdata.name, trainno: userdata.trainno, store: userdata.store }
     }
     if (template == 'UNDELIVERED') {
         data = { deliverystation: userdata.stationid, orderstatus: userdata.orderstatus, orderid: userdata.orderid, trainno: userdata.trainno, store: userdata.store }
@@ -64,7 +64,7 @@ const mergeInfoType = (userdata, template) => {
     if (template == 'VACCEPTED') {
         temp = vaccepted(userdata.itemdetails)
         // console.log(temp);return
-        data = { number: userdata.number, ordernote: userdata.ordernote, orderid: userdata.orderid, name: userdata.name, duepayment: userdata.duepayment, trainno: userdata.trainno, seatno: userdata.seatno, seatno: userdata.seatno, vendorname: userdata.vendorname, expecteddeliverytime: userdata.expecteddeliverytime, stationid: userdata.stationid, table_body: temp }
+        data = { number: userdata.number, ordernote: userdata.ordernote, orderid: userdata.orderid, vendorname: userdata.name, paymentstatus: userdata.duepayment, trainno: userdata.trainno, seatno: userdata.seatno, seatno: userdata.seatno, vendorname: userdata.vendorname, expecteddeliverytime: userdata.expecteddeliverytime, stationid: userdata.stationid, table_body: temp }
     }
     if (template == 'VCANCELLED') {
         data = { ordeid: userdata.orderid, orderid: userdata.orderid, deliverystation: userdata.stationid, reasons: userdata.remarks, Vendor: userdata.store, trainno: userdata.trainno }
@@ -78,7 +78,7 @@ const mergeInfoType = (userdata, template) => {
 
     if (template == 'PLACED') {
         temp = cplaced(userdata.itemdetails, userdata.paymentdata)
-        data = { paymentmode: userdata.duepayment, stationid: userdata.stationid, orderid: userdata.orderid, trainno: userdata.trainno, seatno: userdata.seatno, doj: userdata.doj, expecteddeliverytime: userdata.expecteddeliverytime, stationid: userdata.stationid, table_body: temp }
+        data = { paymentmode: userdata.duepayment, stationid: userdata.stationid, orderid: userdata.orderid, trainno: userdata.trainno, seatno: userdata.seatno, doj: userdata.doj, expecteddeliverytime: userdata.expecteddeliverytime, stationid: userdata.stationid, table_body: temp, name: userdata.name }
     }
 
     data = JSON.stringify(data)

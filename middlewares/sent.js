@@ -1,5 +1,5 @@
-const responseback=()=>{
-  res.status(200).json(response.data)
+const responseback=(res)=>{
+  res.status(200).json({"message": "okay"})
 }
 
 module.exports = {responseback}

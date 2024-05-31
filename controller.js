@@ -14,7 +14,13 @@ dotenv.config()
 const AUTHKEY = process.env.AUTHKEY
 const TESTURL = process.env.TESTURL
 
+
 const send = async (req, res) => {
+
+
+  // Send back the immediate response
+  responseback(res)
+
   // return res.json({message: "Success"})
   let email, message, shortner, userid;
 
@@ -31,8 +37,6 @@ const send = async (req, res) => {
 
   await Payload.create(payload);
 
-  // Send back the immediate response
-  responseback()
 
   if (payload.service.includes("email")) {
     if (emailTemplate.hasOwnProperty(payload.sender.template)) {
@@ -68,20 +72,23 @@ const send = async (req, res) => {
   const entrydata = new SentUser(result);
   await entrydata.save();
 
-  console.log(result);
-  // return res.json(result);
+  console.log(TESTURL);
 
   const targetUrl = TESTURL;
 
   const response = await axios.post(targetUrl, result, {
     headers: {
-      'Authorization': `Bearer ${AUTHKEY}`
+      'Authorization': `Bearer ${AUTHKEY}`,
+      'Content-Type': 'application/json'
     }
   });
 
-  return
+  console.log(response.data);
 
-  // res.status(200).json(response.data)
+  // return res.send(response)
+
+  console.log(result, response.data);
+  return
 
 };
 

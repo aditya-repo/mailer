@@ -11,7 +11,7 @@ const cplaced = (itemdetails, paymentdata) => {
     var htmlString = `
 <tbody>
     <tr>
-        <td style="width: 20px; text-align: center; height: 28px;">
+        <td style="width: 20px; text-align: center; height: 28px;border: 1px solid black;border-collapse: collapse;">
             <b>SL. No</b>.<br>
         </td>
         <td style="width: 200px; text-align:center">
@@ -82,7 +82,8 @@ const cplaced = (itemdetails, paymentdata) => {
                         <b><span class="size" style="font-size:16px;font-size:12px"> ${paymentdata[key]}</span></b><br>
                     </div>
                 </td>
-            </tr>`;
+            </tr>
+            <tbody>`;
         }
     }
     // Add the total row to the HTML string

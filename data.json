@@ -1,10 +1,10 @@
 {
     "payload": {
         "service": [
-            "whatsapp"
+            "email"
         ],
         "user": {
-            "userid": 23152465,
+            "userid": 10001,
             "name": "Aditya RAJ",
             "cnumber": "7050206040",
             "vendorname": "Rajeev Ranjan",
@@ -18,19 +18,27 @@
             "expecteddeliverytime": "2 Hour",
             "stationid": "PNBE",
             "orderamount": 500,
-            "ordertype": "COD",
-            "paymentstatus": "Online Paid",
+            "duepayment": "Rs. 50",
             "remarks": "Not mentioned",
-            "itemdetails": {
+            "itemdetails": [{
                 "itemname": "PANNER BUTTER MASALA COMBO",
                 "quantity": 1,
                 "price": 200
+                }, {
+                "itemname": "SAREEFA",
+                "quantity": 5,
+                "price": 40
+            }],
+            "paymentdata": {
+                "total": "400",
+                "discount":"100",
+                "gst": 15,
+                "payable": "285"
             },
-            "time": "10:00:00",
             "ordernote": "This is an order note",
             "number": 7050020659,
-            "number2": 9576879382,
             "mailid": "adityadesk99@gmail.com",
+            "mailsubject": "This is subject",
             "wnumber": 7050020659,
             "url": "https://trainmenu.com"
         },
