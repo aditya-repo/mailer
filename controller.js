@@ -8,11 +8,11 @@ const { mailStatus, messageStatus, whatsappStatus } = require("./middlewares/sta
 const { messageTemplateId, emailTemplate, whatsappTemplateId } = require("./util");
 const SentUser = require("./model/sent");
 const axios = require('axios')
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
+const { responseback } = require("./middlewares/sent");
 dotenv.config()
 const AUTHKEY = process.env.AUTHKEY
 const TESTURL = process.env.TESTURL
-
 
 const send = async (req, res) => {
   // return res.json({message: "Success"})
@@ -30,6 +30,9 @@ const send = async (req, res) => {
   result = { ...result, userid };
 
   await Payload.create(payload);
+
+  // Send back the immediate response
+  responseback()
 
   if (payload.service.includes("email")) {
     if (emailTemplate.hasOwnProperty(payload.sender.template)) {
@@ -76,7 +79,9 @@ const send = async (req, res) => {
     }
   });
 
-  res.status(200).json(response.data)
+  return
+
+  // res.status(200).json(response.data)
 
 };
 

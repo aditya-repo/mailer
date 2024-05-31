@@ -37,7 +37,7 @@ const emailTemplate = {
 }
 
 const whatsappTemplateId = {
-    "PLACED": "cplaced",
+    "PLACED": "customerplaced",
     "ACCEPTED": "caccepted",
     "DELIVERED": "cdelivered",
     "UNDELIVERED": "cstundelivered",
