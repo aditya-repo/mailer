@@ -111,7 +111,7 @@ const messageTemplate = (userdata, template) => {
 const whatsappTemplate = (u, template) => {
     let message;
     if (template == 'PLACED') {
-        message = `${u.name},${u.stationid},${u.store},${u.orderid},${u.trainno},${u.seatno},${u.orderamount},${u.duepayment},${u.orderdetails}, ${u.remarks} `
+        message = `${u.name},${u.stationid},${u.store},${u.orderid},${u.trainno},${u.seatno},${u.duepayment},${u.orderdetails}, ${u.ordernote} `
     }
     if (template == 'ACCEPTED') {
         message = `${u.name},${u.orderid},${u.stationid}&HeadParam=${u.orderid}`
