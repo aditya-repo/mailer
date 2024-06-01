@@ -42,7 +42,7 @@ const whatsappTemplateId = {
     "DELIVERED": "cdelivered",
     "UNDELIVERED": "cstundelivered",
     "CANCELLED": "cuscancelled",
-    "VACCEPTED": "vplaced",
+    "VACCEPTED": "venplaced",
     "VDELIVERED": "vdelivered",
     "VUNDELIVERED": "vundelivered",
     "VCANCELLED": "vcancel",
@@ -64,7 +64,7 @@ const mergeInfoType = (userdata, template) => {
     if (template == 'VACCEPTED') {
         temp = vaccepted(userdata.itemdetails)
         // console.log(temp);return
-        data = { number: userdata.number, ordernote: userdata.ordernote, orderid: userdata.orderid, vendorname: userdata.name, paymentstatus: userdata.duepayment, trainno: userdata.trainno, seatno: userdata.seatno, seatno: userdata.seatno, vendorname: userdata.vendorname, expecteddeliverytime: userdata.expecteddeliverytime, stationid: userdata.stationid, table_body: temp }
+        data = { number: userdata.number, ordernote: userdata.ordernote, orderid: userdata.orderid,name: userdata.name, vendorname: userdata.vendorname, paymentstatus: userdata.duepayment, trainno: userdata.trainno, seatno: userdata.seatno, seatno: userdata.seatno, expecteddeliverytime: userdata.expecteddeliverytime, stationid: userdata.stationid, table_body: temp }
     }
     if (template == 'VCANCELLED') {
         data = { ordeid: userdata.orderid, orderid: userdata.orderid, deliverystation: userdata.stationid, reasons: userdata.remarks, Vendor: userdata.store, trainno: userdata.trainno }
@@ -126,7 +126,7 @@ const whatsappTemplate = (u, template) => {
         message = `${u.name},${u.orderid},${u.remarks}&HeadParam=${u.orderid}`
     }
     if (template == 'VACCEPTED') {
-        message = `${u.store},${u.orderid},${u.trainno},${u.stationid},${u.name},${u.cnumber},${u.seatno},${u.orderamount},${u.duepayment},${u.orderdetails}, ${u.expecteddeliverytime}, ${u.ordernote}`
+        message = `${u.store},${u.orderid},${u.trainno},${u.stationid}, ${u.expecteddeliverytime}, ${u.name},${u.cnumber},${u.seatno},${u.duepayment},${u.orderdetails},${u.ordernote}`
     }
     if (template == 'VCANCELLED') {
         message = `${u.store},${u.orderid},${u.remarks}&HeadParam=${u.orderid}`

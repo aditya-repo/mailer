@@ -74,6 +74,8 @@ const send = async (req, res) => {
 
   console.log(TESTURL);
 
+  return
+
   const targetUrl = TESTURL;
 
   const response = await axios.post(targetUrl, result, {
@@ -83,7 +85,7 @@ const send = async (req, res) => {
     }
   });
 
-  console.log(response.data);
+  // console.log(response.data);
 
   // return res.send(response)
 
