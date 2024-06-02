@@ -53,13 +53,13 @@ const mergeInfoType = (userdata, template) => {
 
     let data;
     if (template == 'ACCEPTED') {
-        data = { seat: userdata.seatno, deliverystation: userdata.stationid, orderstatus: userdata.orderstatus, orderid: userdata.orderid, trainno: userdata.trainno, store: userdata.store, expecteddeliverytime: userdata.expecteddeliverytime }
+        data = { seat: userdata.seatno, deliverystation: userdata.stationid, orderstatus: userdata.orderstatus, orderid: userdata.orderid, trainno: userdata.trainno, store: userdata.store, expecteddeliverytime: userdata.expecteddeliverytime, customer: userdata.name }
     }
     if (template == 'CANCELLED') {
         data = { ordeid: userdata.orderid, orderid: userdata.orderid, deliverystation: userdata.stationid, customer: userdata.name, trainno: userdata.trainno, store: userdata.store }
     }
     if (template == 'UNDELIVERED') {
-        data = { deliverystation: userdata.stationid, orderstatus: userdata.orderstatus, orderid: userdata.orderid, trainno: userdata.trainno, store: userdata.store }
+        data = { deliverystation: userdata.stationid, orderstatus: userdata.orderstatus, orderid: userdata.orderid, trainno: userdata.trainno, store: userdata.store,  customer: userdata.name }
     }
     if (template == 'VACCEPTED') {
         temp = vaccepted(userdata.itemdetails)
