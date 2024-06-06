@@ -27,6 +27,8 @@ const send = async (req, res) => {
   const { payload } = req.body;
   let result = {};
 
+  console.log(payload);
+
   let data = payload.user
 
   shortner = await shortnerEngine(data.url);
