@@ -64,7 +64,7 @@ const mergeInfoType = (userdata, template) => {
     if (template == 'VACCEPTED') {
         temp = vaccepted(userdata.itemdetails)
         // console.log(temp);return
-        data = { number: userdata.number, ordernote: userdata.ordernote, orderid: userdata.orderid,name: userdata.name, vendorname: userdata.vendorname, paymentstatus: userdata.duepayment, trainno: userdata.trainno, seatno: userdata.seatno, seatno: userdata.seatno, expecteddeliverytime: userdata.expecteddeliverytime, stationid: userdata.stationid, table_body: temp }
+        data = { number: userdata.cnumber, ordernote: userdata.ordernote, orderid: userdata.orderid,name: userdata.name, vendorname: userdata.vendorname, paymentstatus: userdata.duepayment, trainno: userdata.trainno, seatno: userdata.seatno, seatno: userdata.seatno, expecteddeliverytime: userdata.expecteddeliverytime, stationid: userdata.stationid, table_body: temp }
     }
     if (template == 'VCANCELLED') {
         data = { ordeid: userdata.orderid, orderid: userdata.orderid, deliverystation: userdata.stationid, reasons: userdata.remarks, Vendor: userdata.store, trainno: userdata.trainno }
